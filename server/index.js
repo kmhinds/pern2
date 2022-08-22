@@ -1,13 +1,6 @@
-const express = require('express')
-
-const api = express();
-
-api.get('/hello-world', (req, res) => {
-    res.json('hello-world')
-});
-
-api.listen(process.env.PORT || 3000, () => {
-    console.log('listening on port:3000')
-})
-
-// new comment
+export default function handler(req, res) {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.json({ name: 'John Doe' });
+  }
+  
