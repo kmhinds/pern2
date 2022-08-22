@@ -1,0 +1,2 @@
+ALTER TABLE to_do
+RENAME COLUMN user_id TO id;
