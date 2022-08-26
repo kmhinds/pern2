@@ -1,22 +1,10 @@
 const app = require('express')();
 const client = require('../db-client')
 
-// function checkUser(req, res, next) {
-//   if ( req.path == '/') return next();
-
-//   //authenticate user
-//   next();
-//  }
-
-function addHeader(req, res, next) {
-  if (req.path == '/') {
-    return next();
-  }
+app.use((_, res, next) => {
+  res.setHeader('access-control-allow-origin', '*');
   next();
-}
-// app.use([(req, res) => {
-//   response.setHeader('access-control-allow-origin', '*');
-// }])
+})
 
 app.get('/api/todos', (req, response) => {
     client.query('SELECT * FROM to_do;', (err, res) => {
