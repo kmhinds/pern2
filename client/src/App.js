@@ -5,9 +5,9 @@ import { useState, useEffect } from 'react';
 function App() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
-  
+
   useEffect(() => {
-    fetch(process.env.REACT_APP_SERVER_ENDPOINT).then( async (res) => {
+    fetch(process.env.REACT_APP_SERVER_ENDPOINT + '/todos').then( async (res) => {
       const data = await res.json();
       console.log(data);
       setData(data);
