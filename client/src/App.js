@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 function App() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
-  // new change to client
+  
   useEffect(() => {
     fetch(process.env.REACT_APP_SERVER_ENDPOINT).then( async (res) => {
       const data = await res.json();
