@@ -40,7 +40,18 @@ app.post('/api/todos', (req, response) => {
     }
 });
 
-// TODO: Add a POST route
+app.put('/api/todos', (req, response) => {
+  client.query(/*postgres code in here */),
+  (err, dbRes) => {
+    if (err) {
+      console.log(err);
+      response.status(500).json({error: 'failed to update todo'})
+    }
+  }
+})
+
+
+// TODO: Add a POST route = done
 // TODO: Add a DELETE route
 // TODO: Add a PUT route
 // TODO: Add route /api/todo?

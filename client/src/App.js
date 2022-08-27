@@ -64,7 +64,6 @@ function App() {
           <input name='description' id='description' type='text' value={description} onChange={(e)=> setDescription(e.target.value)} required></input>
           <label htmlFor='priority' >Priority</label>
           <select name='priority' id='priority' value={priority} onChange={(e)=> {
-            console.log(e.target.value,)
             setPriority(e.target.value)
           }} required>
             <option value='low'>Low</option>
