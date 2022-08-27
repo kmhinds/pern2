@@ -40,14 +40,22 @@ app.post('/api/todos', (req, response) => {
     }
 });
 
-app.put('/api/todos', (req, response) => {
-  client.query(/*postgres code in here */),
-  (err, dbRes) => {
-    if (err) {
-      console.log(err);
-      response.status(500).json({error: 'failed to update todo'})
-    }
-  }
+app.put('/api/todos/:id', (req, response) => {
+  console.log('PARAMS: ', req.params)
+  console.log('BODY: ', req.body)
+
+  // client.query(
+  //   `UPDATE to_do
+  //   SET '${body.description}', '${body.priority}'
+  //   WHERE ${body.description}
+  //   AND ${body.priority}`),
+  // (err, dbRes) => {
+  //   if (err) {
+  //     console.log(err);
+  //     response.status(500).json({error: 'failed to update todo'})
+  //   }
+  //   response.json(dbRes.rows) 
+  // }
 })
 
 
