@@ -16,7 +16,6 @@ const createTodo = async ({priority, description}) =>  {
       })
     }
   ).then((res) => {
-    console.log(res)
   }).catch((err) => {
       console.error(err)
     }
@@ -38,7 +37,6 @@ const editTodo = async ({priority, description, id}) =>  {
       })
     }
   ).then((res) => {
-    console.log(res)
   }).catch((err) => {
       console.error(err)
     }
@@ -46,20 +44,18 @@ const editTodo = async ({priority, description, id}) =>  {
 }
 
 
-export default function Form({descriptionPassed, priorityPassed, type, id}) {
+export default function Form({descriptionPassed, priorityPassed, type, id, onAfterSave = () => null}) {
 
   const [description, setDescription] = useState(descriptionPassed || '');
   const [priority, setPriority] = useState(priorityPassed || 'low');
   
-  
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (type === 'new') {
-      createTodo({description, priority});
-    }
-    console.log('submit')
+      createTodo({description, priority}).then(() => {onAfterSave()});
+    } else {editTodo({description, priority, id})}
   }
+
   return (
       <form>
         <label htmlFor='description' >Description</label>
