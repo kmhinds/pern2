@@ -11,7 +11,6 @@ export const Todo = ({description, priority, id}) => {
     if (isEdit) {
         return <Form description={description} priority={priority} id={id}/>
     }
-    console.log(description)
     return (
         <>
         <li>Description: {description} Priority: {priority}</li>

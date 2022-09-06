@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 
-// Form is not pre filling with existing description data
-
-const createTodo = async ({priority, description}) =>  {
-  return fetch(
+const createTodo = ({priority, description}) => { 
+  fetch(
     process.env.REACT_APP_SERVER_ENDPOINT + '/todos',
     {
       method: 'POST',
@@ -14,10 +12,6 @@ const createTodo = async ({priority, description}) =>  {
         priority: priority,
         description: description
       })
-    }
-  ).then((res) => {
-  }).catch((err) => {
-      console.error(err)
     }
   )
 }
@@ -49,11 +43,18 @@ export default function Form({descriptionPassed, priorityPassed, type, id, onAft
   const [description, setDescription] = useState(descriptionPassed || '');
   const [priority, setPriority] = useState(priorityPassed || 'low');
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (type === 'new') {
-      createTodo({description, priority}).then(() => {onAfterSave()});
-    } else {editTodo({description, priority, id})}
+      try {
+        console.log('running new')
+        await createTodo({description, priority})
+        console.log('onAfterSave ran')
+        onAfterSave();
+      } catch(err) {
+        console.error(err)
+      }
+    } else {editTodo({description, priority, id}).then(() => {onAfterSave()})}
   }
 
   return (

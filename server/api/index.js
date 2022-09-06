@@ -23,13 +23,13 @@ app.get('/api/todos', (req, response) => {
   })
 });
 
-app.post('/api/todos', (req, response) => {
+app.post('/api/todos', async (req, response) => {
   const body = req.body;
 
-  client.query(`
+  await client.query(`
     INSERT INTO to_do (id, description, priority) 
-    VALUES (DEFAULT, '${body.description}', '${body.priority}');`
-    ), 
+    VALUES (DEFAULT, '${body.description}', '${body.priority}');
+    `,
     (err, dbRes) => {
       if (err) {
         console.error(err);
@@ -37,6 +37,7 @@ app.post('/api/todos', (req, response) => {
       } 
       response.json(dbRes.rows)
     }
+    )
 });
 
 app.put('/api/todos/:id', (req, response) => {

@@ -6,19 +6,31 @@ import {Todo} from './components/Todo';
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState();
+  const [todos, setTodos] = useState();
+
+  const getTodos = () => {
+    return fetch(process.env.REACT_APP_SERVER_ENDPOINT + '/todos').then( async (res) => {
+      const data = await res.json();
+      return data;
+    })
+  }
 
   useEffect(() => {
-    fetch(process.env.REACT_APP_SERVER_ENDPOINT + '/todos').then( async (res) => {
-      const data = await res.json();
-      setData(data);
+    getTodos().then((data) => {
+      console.log(data);
+      setTodos(data);
       setLoading(false);
     })
+    
+    // fetch(process.env.REACT_APP_SERVER_ENDPOINT + '/todos').then(async (res) => {
+    //   const data = await res.json();
+      // setTodos(data);
+      // setLoading(false);
   }, [])
 
   if (loading) {
     return <div>loading...</div>
-  }
+  };
 
   return (
     <div>
@@ -26,7 +38,7 @@ function App() {
         todos:
       </h1>
       <ul>
-        {data.map((todo)=>{
+        {todos.map((todo)=>{
           return (
             <div key={todo.id}>
               <Todo description={todo.description} priority={todo.priority} id={todo.id}/>
@@ -35,9 +47,13 @@ function App() {
           )
         })}
       </ul>
-      <Form type='new' />
+      <Form type='new' onAfterSave={() => {getTodos().then((data) => {
+        console.log(data);
+        setTodos(data);
+      })}}/>  
     </div>
-  );
+    
+  )
 }
 
 export default App;
