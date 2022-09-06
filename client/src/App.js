@@ -4,6 +4,8 @@ import { useState, useEffect, Fragment } from 'react';
 import Form from './components/Form';
 import {Todo} from './components/Todo';
 
+// MAKE YOUR APP REFRESH ON SUBMIT
+
 function App() {
   const [loading, setLoading] = useState(true);
   const [todos, setTodos] = useState();
@@ -50,6 +52,7 @@ function App() {
       <Form type='new' onAfterSave={() => {getTodos().then((data) => {
         console.log(data);
         setTodos(data);
+        return;
       })}}/>  
     </div>
     

@@ -44,7 +44,7 @@ export default function Form({descriptionPassed, priorityPassed, type, id, onAft
   const [priority, setPriority] = useState(priorityPassed || 'low');
   
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (type === 'new') {
       try {
         console.log('running new')
