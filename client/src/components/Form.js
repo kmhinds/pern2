@@ -36,7 +36,22 @@ const editTodo = async ({priority, description, id}) =>  {
     }
   )
 }
-
+// does this function work
+const deleteTodo = ({id}) => {
+  return fetch(
+    process.env.REACT_APP_SERVER_ENDPOINT + '/todos/' + id,
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+  ).then((res) => {
+  }).catch((err) => {
+    console.error(err)
+  })
+}
+// Do I need a deleteTodo function???? For my delete route???
 
 export default function Form({descriptionPassed, priorityPassed, type, id, onAfterSave = () => null}) {
 
@@ -44,7 +59,7 @@ export default function Form({descriptionPassed, priorityPassed, type, id, onAft
   const [priority, setPriority] = useState(priorityPassed || 'low');
   
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    // e.preventDefault(); put this back to prevent page change
     if (type === 'new') {
       try {
         console.log('running new')
@@ -55,6 +70,11 @@ export default function Form({descriptionPassed, priorityPassed, type, id, onAft
         console.error(err)
       }
     } else {editTodo({description, priority, id}).then(() => {onAfterSave()})}
+  }
+
+  // work on this function
+  const handleDelete = e => {
+    deleteTodo({id})
   }
 
   return (

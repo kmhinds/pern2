@@ -57,6 +57,21 @@ app.put('/api/todos/:id', (req, response) => {
     response.json(dbRes.rows) 
   }
 })
+// not sure if this works check the client side and work on the deleteTodo function
+// work on the handle Delete button
+app.delete('api/todos/:id', (req, response) => {
+  client.query(
+    `DELETE FROM to_do
+    WHERE id = '${req.params.id}';
+    `
+  ),
+  (err, dbRes) => {
+    if (err) {
+      console.error(err);
+      response.status(500).json({error: 'failed to delete todo'})
+    }
+  }
+})
 
 
 // TODO: Add a GET route = done
