@@ -20,7 +20,7 @@ export const Todo = ({description, priority, id}) => {
         <>
         <li>Description: {description} Priority: {priority}</li>
         <button onClick={e => setIsEdit(true)}>Edit</button>
-        <button onClick={}>Delete</button>
+        <button onClick={null}>Delete</button>
         </>
     )
 } 
