@@ -37,7 +37,7 @@ const editTodo = async ({priority, description, id}) =>  {
   )
 }
 // does this function work
-const deleteTodo = ({id}) => {
+const deleteTodo = async ({id}) => {
   return fetch(
     process.env.REACT_APP_SERVER_ENDPOINT + '/todos/' + id,
     {
@@ -73,8 +73,8 @@ export default function Form({descriptionPassed, priorityPassed, type, id, onAft
   }
 
   // work on this function
-  const handleDelete = e => {
-    deleteTodo({id})
+  const handleDelete = async e => {
+    
   }
 
   return (

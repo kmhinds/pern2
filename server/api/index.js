@@ -70,6 +70,7 @@ app.delete('api/todos/:id', (req, response) => {
       console.error(err);
       response.status(500).json({error: 'failed to delete todo'})
     }
+    response.json(dbRes.rows)
   }
 })
 
